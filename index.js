@@ -23,9 +23,9 @@ app.get('/', (req, res) => {
   })
 })
 
-app.post('/merge', upload.array('pdfs', 2), async (req, res) => {
+app.post('/merge', upload.array('pdfs'), async (req, res) => {
   const title = req.body.title;
-  const filename = await mergePDFs(req.files[0].path, req.files[1].path, title);
+  const filename = await mergePDFs(req.files);
 
   res.redirect(`/pdfs/${filename}`)
 })

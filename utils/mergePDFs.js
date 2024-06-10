@@ -4,10 +4,12 @@ const fs = require('fs')
 const merger = new PDFMerger();
 
 
-const mergePDFs = async (pdf1, pdf2, title) => {
-    const filename = Date.now() + '_' + title;
-    await merger.add(pdf1);
-    await merger.add(pdf2);
+const mergePDFs = async (files) => {
+    const filename = Date.now();
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        await merger.add(file.path)
+    }
 
     if (!fs.existsSync('public\\pdfs')) {
         fs.mkdirSync('public\\pdfs');
